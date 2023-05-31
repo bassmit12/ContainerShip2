@@ -1,0 +1,15 @@
+C:\Users\Bas Smit\source\repos\ContainerShip2\ContainerShip2\bin\Debug\net6.0\ContainerShip2.exe
+C:\Users\Bas Smit\source\repos\ContainerShip2\ContainerShip2\bin\Debug\net6.0\ContainerShip2.deps.json
+C:\Users\Bas Smit\source\repos\ContainerShip2\ContainerShip2\bin\Debug\net6.0\ContainerShip2.runtimeconfig.json
+C:\Users\Bas Smit\source\repos\ContainerShip2\ContainerShip2\bin\Debug\net6.0\ContainerShip2.dll
+C:\Users\Bas Smit\source\repos\ContainerShip2\ContainerShip2\bin\Debug\net6.0\ContainerShip2.pdb
+C:\Users\Bas Smit\source\repos\ContainerShip2\ContainerShip2\obj\Debug\net6.0\ContainerShip2.csproj.AssemblyReference.cache
+C:\Users\Bas Smit\source\repos\ContainerShip2\ContainerShip2\obj\Debug\net6.0\ContainerShip2.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Bas Smit\source\repos\ContainerShip2\ContainerShip2\obj\Debug\net6.0\ContainerShip2.AssemblyInfoInputs.cache
+C:\Users\Bas Smit\source\repos\ContainerShip2\ContainerShip2\obj\Debug\net6.0\ContainerShip2.AssemblyInfo.cs
+C:\Users\Bas Smit\source\repos\ContainerShip2\ContainerShip2\obj\Debug\net6.0\ContainerShip2.csproj.CoreCompileInputs.cache
+C:\Users\Bas Smit\source\repos\ContainerShip2\ContainerShip2\obj\Debug\net6.0\ContainerShip2.dll
+C:\Users\Bas Smit\source\repos\ContainerShip2\ContainerShip2\obj\Debug\net6.0\refint\ContainerShip2.dll
+C:\Users\Bas Smit\source\repos\ContainerShip2\ContainerShip2\obj\Debug\net6.0\ContainerShip2.pdb
+C:\Users\Bas Smit\source\repos\ContainerShip2\ContainerShip2\obj\Debug\net6.0\ContainerShip2.genruntimeconfig.cache
+C:\Users\Bas Smit\source\repos\ContainerShip2\ContainerShip2\obj\Debug\net6.0\ref\ContainerShip2.dll
