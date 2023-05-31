@@ -2,8 +2,8 @@
 
 public class Stack
 {
-    private int width;
-    private int length;
+    public int width;
+    public int length;
     private int height;
     public List<Container>[,] layout;
 
@@ -52,23 +52,25 @@ public class Stack
         return false;
     }
 
-    public int GetWeightAtPosition(int x, int y)
+    public int GetWeightAtPosition(int x, int y, List<Stack> stacks)
     {
-        int weight = 0;
+        int totalWeight = 0;
 
-        for (int i = 0; i < layout[x, y].Count; i++)
+        foreach (Stack stack in stacks)
         {
-            for (int j = y + 1; j < length; j++)
+            if (stack.layout[x, y] != null)
             {
-                if (layout[x, j] != null && i < layout[x, j].Count)
-                {
-                    weight += layout[x, j][i].Weight;
-                }
+                totalWeight += stack.layout[x, y].Sum(container => container.Weight);
             }
         }
 
-        return weight;
-    }   
+        return totalWeight;
+    }
+
+
+
+
+
 
     public void PrintStack()
     {

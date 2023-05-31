@@ -6,7 +6,7 @@ namespace ContainerShip2
     {
         static void Main(string[] args)
         {
-            Ship ship = new Ship(2, 3);
+            Ship ship = new Ship(4, 3);
 
             // Create a list of containers
             List<Container> containers = new List<Container>();
