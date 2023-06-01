@@ -16,21 +16,26 @@ public class Stack
     }
 
 
-    public bool TryPlaceColdContainer(Container container)
+    public bool TryPlaceColdContainer(Container container, List<Stack> stacks)
     {
         for (int x = 0; x < width; x++)
         {
             if (layout[x, 0] == null)
             {
-                layout[x, 0] = new List<Container>() { container };
-                return true;
+                // Check if the weight of the container itself exceeds the limit
+                if (container.Weight <= 120000)
+                {
+                    layout[x, 0] = new List<Container>() { container };
+                    return true;
+                }
             }
         }
 
         return false;
     }
 
-    public bool TryPlaceNormalContainer(Container container)
+
+    public bool TryPlaceNormalContainer(Container container, List<Stack> stacks)
     {
         for (int x = 0; x < width; x++)
         {
@@ -38,13 +43,22 @@ public class Stack
             {
                 if (layout[x, y] == null)
                 {
-                    layout[x, y] = new List<Container>() { container };
-                    return true;
+                    // Check if the weight of the container itself exceeds the limit
+                    if (container.Weight <= 120000)
+                    {
+                        layout[x, y] = new List<Container>() { container };
+                        return true;
+                    }
                 }
                 else if (layout[x, y].Count < layout[0, 0].Count)
                 {
-                    layout[x, y].Add(container);
-                    return true;
+                    int stackWeight = GetWeightAtPosition(x, y, stacks); // Get the total weight of the stack
+
+                    if (stackWeight + container.Weight <= 120000) // Check weight limit
+                    {
+                        layout[x, y].Add(container);
+                        return true;
+                    }
                 }
             }
         }
@@ -52,25 +66,26 @@ public class Stack
         return false;
     }
 
+
+
+
+
     public int GetWeightAtPosition(int x, int y, List<Stack> stacks)
     {
         int totalWeight = 0;
+        int lowestContainerWeight = int.MaxValue;
 
         foreach (Stack stack in stacks)
         {
             if (stack.layout[x, y] != null)
             {
                 totalWeight += stack.layout[x, y].Sum(container => container.Weight);
+                lowestContainerWeight = Math.Min(lowestContainerWeight, stack.layout[x, y].Last().Weight);
             }
         }
 
-        return totalWeight;
+        return totalWeight - lowestContainerWeight;
     }
-
-
-
-
-
 
     public void PrintStack()
     {
