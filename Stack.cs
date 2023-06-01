@@ -43,8 +43,10 @@ public class Stack
             {
                 if (layout[x, y] == null)
                 {
-                    // Check if the weight of the container itself exceeds the limit
-                    if (container.Weight <= 120000)
+                    int stackWeight = GetWeightAtPosition(x, y, stacks); // Get the total weight of the stack
+
+                    
+                    if (stackWeight + container.Weight <= 120000) // Check if the weight of the container itself exceeds the limit
                     {
                         layout[x, y] = new List<Container>() { container };
                         return true;
