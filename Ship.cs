@@ -7,7 +7,7 @@ namespace ContainerShip2
     {
         public int width;
         public int length;
-        public List<Stack> stacks;
+        public List<Layer> layers;
 
         private Balancer balancer;
 
@@ -16,7 +16,7 @@ namespace ContainerShip2
             this.width = width;
             this.length = length;
 
-            stacks = new List<Stack>();
+            layers = new List<Layer>();
 
             balancer = new Balancer(this);
         }
@@ -56,9 +56,9 @@ namespace ContainerShip2
             {
                 bool placed = false;
 
-                foreach (Stack stack in stacks)
+                foreach (Layer stack in layers)
                 {
-                    if (stack.TryPlaceColdContainer(container, stacks))
+                    if (stack.TryPlaceColdContainer(container, layers))
                     {
                         placed = true;
                         break;
@@ -67,9 +67,9 @@ namespace ContainerShip2
 
                 if (!placed)
                 {
-                    Stack newStack = new Stack(width, length);
-                    newStack.TryPlaceColdContainer(container, stacks);
-                    stacks.Add(newStack);
+                    Layer newStack = new Layer(width, length);
+                    newStack.TryPlaceColdContainer(container, layers);
+                    layers.Add(newStack);
                 }
             }
         }
@@ -80,9 +80,9 @@ namespace ContainerShip2
             {
                 bool placed = false;
 
-                foreach (Stack stack in stacks)
+                foreach (Layer stack in layers)
                 {
-                    if (stack.TryPlaceNormalContainer(container, stacks))
+                    if (stack.TryPlaceNormalContainer(container, layers))
                     {
                         placed = true;
                         break;
@@ -91,9 +91,9 @@ namespace ContainerShip2
 
                 if (!placed)
                 {
-                    Stack newStack = new Stack(width, length);
-                    newStack.TryPlaceNormalContainer(container, stacks);
-                    stacks.Add(newStack);
+                    Layer newStack = new Layer(width, length);
+                    newStack.TryPlaceNormalContainer(container, layers);
+                    layers.Add(newStack);
                 }
             }
         }
@@ -103,7 +103,7 @@ namespace ContainerShip2
         {
             int totalWeight = 0;
 
-            foreach (Stack stack in stacks)
+            foreach (Layer stack in layers)
             {
                 for (int y = 0; y < stack.length; y++)
                 {
@@ -137,18 +137,18 @@ namespace ContainerShip2
 
             Dictionary<(int, int), int> positionWeights = new Dictionary<(int, int), int>();
 
-            for (int i = 0; i < stacks.Count; i++)
+            for (int i = 0; i < layers.Count; i++)
             {
                 Console.WriteLine($"Stack {i + 1}:");
-                stacks[i].PrintStack();
+                layers[i].PrintStack();
 
-                for (int y = 0; y < stacks[i].length; y++)
+                for (int y = 0; y < layers[i].length; y++)
                 {
-                    for (int x = 0; x < stacks[i].width; x++)
+                    for (int x = 0; x < layers[i].width; x++)
                     {
                         if (!positionWeights.ContainsKey((x, y)))
                         {
-                            int totalWeight = stacks[i].GetWeightAtPosition(x, y, stacks);
+                            int totalWeight = layers[i].GetWeightAtPosition(x, y, layers);
                             positionWeights.Add((x, y), totalWeight);
                         }
                     }
@@ -188,24 +188,24 @@ namespace ContainerShip2
                 int rightWeight = 0;
                 int totalWeight = 0;
 
-                for (int i = 0; i < stacks.Count; i++)
+                for (int i = 0; i < layers.Count; i++)
                 {
-                    for (int y = 0; y < stacks[i].length; y++)
+                    for (int y = 0; y < layers[i].length; y++)
                     {
-                        for (int x = 0; x < stacks[i].width; x++)
+                        for (int x = 0; x < layers[i].width; x++)
                         {
-                            if (stacks[i].layout[x, y] != null)
+                            if (layers[i].layout[x, y] != null)
                             {
                                 if (x < middleLaneStartCol)
                                 {
-                                    leftWeight += stacks[i].layout[x, y].Sum(container => container.Weight);
+                                    leftWeight += layers[i].layout[x, y].Sum(container => container.Weight);
                                 }
                                 else
                                 {
-                                    rightWeight += stacks[i].layout[x, y].Sum(container => container.Weight);
+                                    rightWeight += layers[i].layout[x, y].Sum(container => container.Weight);
                                 }
 
-                                totalWeight += stacks[i].layout[x, y].Sum(container => container.Weight);
+                                totalWeight += layers[i].layout[x, y].Sum(container => container.Weight);
                             }
                         }
                     }
@@ -223,28 +223,28 @@ namespace ContainerShip2
                 int rightWeight = 0;
                 int totalWeight = 0;
 
-                for (int i = 0; i < stacks.Count; i++)
+                for (int i = 0; i < layers.Count; i++)
                 {
-                    for (int y = 0; y < stacks[i].length; y++)
+                    for (int y = 0; y < layers[i].length; y++)
                     {
-                        for (int x = 0; x < stacks[i].width; x++)
+                        for (int x = 0; x < layers[i].width; x++)
                         {
-                            if (stacks[i].layout[x, y] != null)
+                            if (layers[i].layout[x, y] != null)
                             {
                                 if (x < middleLaneStartCol)
                                 {
-                                    leftWeight += stacks[i].layout[x, y].Sum(container => container.Weight);
+                                    leftWeight += layers[i].layout[x, y].Sum(container => container.Weight);
                                 }
                                 else if (x > middleLaneStartCol)
                                 {
-                                    rightWeight += stacks[i].layout[x, y].Sum(container => container.Weight);
+                                    rightWeight += layers[i].layout[x, y].Sum(container => container.Weight);
                                 }
                                 else
                                 {
-                                    middleWeight += stacks[i].layout[x, y].Sum(container => container.Weight);
+                                    middleWeight += layers[i].layout[x, y].Sum(container => container.Weight);
                                 }
 
-                                totalWeight += stacks[i].layout[x, y].Sum(container => container.Weight);
+                                totalWeight += layers[i].layout[x, y].Sum(container => container.Weight);
                             }
                         }
                     }

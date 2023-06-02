@@ -1,13 +1,13 @@
 ﻿using ContainerShip2;
 
-public class Stack
+public class Layer
 {
     public int width;
     public int length;
     private int height;
     public List<Container>[,] layout;
 
-    public Stack(int width, int length)
+    public Layer(int width, int length)
     {
         this.width = width;
         this.length = length;
@@ -16,13 +16,13 @@ public class Stack
     }
 
 
-    public bool TryPlaceColdContainer(Container container, List<Stack> stacks)
+    public bool TryPlaceColdContainer(Container container, List<Layer> layers)
     {
         for (int x = 0; x < width; x++)
         {
             if (layout[x, 0] == null)
             {
-                int stackWeight = GetWeightAtPosition(x, 0, stacks);
+                int stackWeight = GetWeightAtPosition(x, 0, layers);
 
                 // Check if the weight of the container itself exceeds the limit
                 if (stackWeight + container.Weight <= 120000)
@@ -37,7 +37,7 @@ public class Stack
     }
 
 
-    public bool TryPlaceNormalContainer(Container container, List<Stack> stacks)
+    public bool TryPlaceNormalContainer(Container container, List<Layer> layers)
     {
         for (int x = 0; x < width; x++)
         {
@@ -54,7 +54,7 @@ public class Stack
                 }
                 else if (layout[x, y].Count < layout[0, 0].Count)
                 {
-                    int stackWeight = GetWeightAtPosition(x, y, stacks); // Get the total weight of the stack
+                    int stackWeight = GetWeightAtPosition(x, y, layers); // Get the total weight of the stack
 
                     if (stackWeight + container.Weight <= 120000) // Check weight limit
                     {
@@ -74,12 +74,12 @@ public class Stack
 
 
 
-    public int GetWeightAtPosition(int x, int y, List<Stack> stacks)
+    public int GetWeightAtPosition(int x, int y, List<Layer> layers)
     {
         int totalWeight = 0;
         int lowestContainerWeight = int.MaxValue;
 
-        foreach (Stack stack in stacks)
+        foreach (Layer stack in layers)
         {
             if (stack.layout[x, y] != null)
             {
