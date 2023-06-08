@@ -41,33 +41,40 @@ public class Layer
     {
         for (int x = 0; x < width; x++)
         {
-            for (int y = 0; y < length; y++)
+            for (int y = 1; y < length; y++) // Start from y = 1 to skip the first row
             {
-                if (layout[x, y] == null)
+                int stackWeight = GetWeightAtPosition(x, y, stacks); // Get the total weight of the stack
+
+                if (stackWeight + container.Weight <= 120000) // Check weight limit
                 {
-                    // Check if the weight of the container itself exceeds the limit
-                    if (container.Weight <= 120000)
+                    if (layout[x, y] == null)
                     {
                         layout[x, y] = new List<Container>() { container };
                         return true;
                     }
+<<<<<<< Updated upstream:Layer.cs
                 }
                 else if (layout[x, y].Count < layout[0, 0].Count)
                 {
                     int stackWeight = GetWeightAtPosition(x, y, layers); // Get the total weight of the stack
+=======
+>>>>>>> Stashed changes:Stack.cs
 
-                    if (stackWeight + container.Weight <= 120000) // Check weight limit
+                    else if (layout[x, y] != null && layout[x, y].Count < layout[0, 0]?.Count)
                     {
                         layout[x, y].Add(container);
                         return true;
+
                     }
                 }
+                
             }
         }
 
         return false;
     }
 
+<<<<<<< Updated upstream:Layer.cs
 
 
 
@@ -75,6 +82,9 @@ public class Layer
 
 
     public int GetWeightAtPosition(int x, int y, List<Layer> layers)
+=======
+    public int GetWeightAtPosition(int x, int y, List<Stack> stacks)
+>>>>>>> Stashed changes:Stack.cs
     {
         int totalWeight = 0;
         int lowestContainerWeight = int.MaxValue;
@@ -90,6 +100,13 @@ public class Layer
 
         return totalWeight - lowestContainerWeight;
     }
+
+
+
+
+
+
+
 
     public void PrintStack()
     {

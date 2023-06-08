@@ -157,7 +157,7 @@ namespace ContainerShip2
                 Console.WriteLine();
             }
 
-            Console.WriteLine("Weights:");
+            Console.WriteLine("Container loads:");
 
             foreach (var positionWeight in positionWeights)
             {
@@ -257,8 +257,6 @@ namespace ContainerShip2
                 Console.WriteLine($"Right side weight: {rightWeight} kg ({((double)rightWeight / totalWeight) * 100:F0}% of total weight)");
             }
         }
-
-
 
         public void PrintBalanceStatus()
         {
